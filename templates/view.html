@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Bookings</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>View Bookings</h1>
+    <form id="filterForm">
+        <label for="room_filter">Filter by Room Type:</label>
+        <select id="room_filter" name="room_filter">
+            <option value="">All</option>
+            <option value="A">Room Type A</option>
+            <option value="B">Room Type B</option>
+            <option value="C">Room Type C</option>
+        </select><br><br>
+
+        <button type="submit">Apply Filters</button>
+    </form>
+
+    <table>
+        <tr>
+            <th>Room Type</th>
+            <th>Room Number</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Email</th>
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+        {% for room_type, room_info in rooms.items() %}
+            {% for booking in room_info['booked'] %}
+                <tr>
+                    <td>{{ room_type }}</td>
+                    <td>{{ booking.room_number }}</td>
+                    <td>{{ booking.start_time }}</td>
+                    <td>{{ booking.end_time }}</td>
+                    <td>{{ booking.email }}</td>
+                    <td>{{ booking.price }}</td>
+                    <td>
+                        <button onclick="editBooking('{{ room_type }}', '{{ booking.room_number }}', '{{ booking.start_time }}', '{{ booking.end_time }}')">Edit</button>
+                        <button onclick="cancelBooking('{{ booking.id }}')">Cancel</button>
+                    </td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="6">Available Rooms: {{ room_info.available }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

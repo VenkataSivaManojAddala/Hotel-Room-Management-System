@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Katibeh&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@300;400;500;600;700&family=Katibeh&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hotel Management</title>
+</head>
+
+<style>
+    body, html {
+        height: 100%;
+        margin: 0;
+        font-family: "katibeh", Arial, Helvetica, sans-serif
+    }
+
+    .title {
+        padding-top: 50px;
+        color: black;
+        font-family: "Cormorant SC";
+        font-size: 48px;
+        height: 48px;
+        display: grid;
+    }
+
+    .descript {
+        height: 30px;
+        padding: 0px;
+        font-size: 30px;
+    }
+
+
+    .bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url(https://png.pngtree.com/background/20230610/original/pngtree-sketch-with-a-brown-building-is-shown-picture-image_3111056.jpg );
+        background-size: cover; /* Cover the entire viewport */
+        background-position: top; /* Position the image at the top */
+        filter: blur(5px);
+        z-index: -1;
+    }
+
+    .container {
+        height: 200%;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto; /* Enable vertical scrolling */
+        
+    }
+    .half-page {
+        height: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-bottom: 2px solid #ccc; /* Add border to create division */
+        position: relative; /* Ensure content is positioned relative to this container */
+    }
+
+    .second-half {
+        background-image: linear-gradient(to bottom, black , rgb(29, 29, 29));
+        color: white;
+    }
+    
+    .tabs {
+        padding-bottom: 100px;
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        margin-top: 20px;
+        transition: all 4s smooth;
+    }
+
+    .tab {
+        text-align: center;
+        margin: 1em;
+        border: 0.1px solid black; /* Remove border */
+        border-radius: 20px;
+        backdrop-filter: blur(50px); /* Blur effect */
+        -webkit-backdrop-filter: blur(50px); /* For Safari */
+        height: 100%;
+        width: 36%;
+        transition: all 0.3s ease;
+    }
+
+    .tab:hover {
+        padding-right: 20%; /* Double the width on hover */
+        border-width: 0.1px; /* Set the border width to avoid flickering */
+    }
+
+    .tab:after {
+        display: none;
+    }
+
+    .tab img {
+        border-radius: 20px;
+        width: 80%;
+        border-radius: 5%;
+        filter: grayscale();
+        display: block;
+        margin-left: auto;
+        margin-top: 8%;
+        margin-bottom: 12%;
+        margin-right: auto;
+        width: 80%;
+    }
+
+    .tab a {
+        border-radius: 20px;
+        background-color: black;
+        font-size: 20px;
+        border: none;
+        color: #fff;
+        transition: all 0.3s;
+        text-align: center;
+        padding-right: 30px;
+        padding-left: 30px;
+        padding-top: 6px;
+        padding-bottom: 10px;
+        position: relative;
+        cursor: pointer;
+    }
+
+    .tab a:hover{
+        background-color: white;
+        color: black;
+        padding-left: 30%;
+        padding-right: 30%;
+    }
+
+    .hover-text {
+        display: none; /* Initially hide hover text */
+        position: absolute; /* Position the hover text absolutely */
+        top: 50%; /* Align the text vertically */
+        left: 0; /* Align the text to the left edge of the tab */
+        right: 0; /* Align the text to the right edge of the tab */
+        text-align: left; /* Center align the text */
+        transform: translateX(50%) translateY(-70%); /* Adjust vertical alignment */
+        font-size: 20px; /* Set font size */
+        color: white; /* Set text color */
+        z-index: -1; /* Ensure the hover text appears above the tab content */;
+    }
+
+    .tab:hover .hover-text {
+        display: block; /* Show hover text on hover */
+    }
+
+    .plain{
+        font-size: 48px;
+    }
+
+</style>
+</head>
+<body>
+<div class="bg"></div> <!-- Background image container -->
+<div class="container">
+    <div class="half-page">
+        <h1 class="title" style="margin-top: 0;">HOTEL ROOM MANAGEMENT</h1> <!-- Move h1 to top and remove top margin -->
+        <p class="descript">Welcome Admin, Have a great day</p>
+        <div class="tabs">
+            <div class="tab">
+                <img src="https://i.ibb.co/TBrMyGh/book.jpg" alt="Book a room">
+                <a onclick="showContent('Book')">Book</a>
+                <span class="hover-text">Book a room for a new customer. <br>There are 3 types of rooms available. <br>Click "Book" for more information.</span> <!-- Added hover text -->
+            </div>
+            
+            <div class="tab">
+                <img src="https://i.ibb.co/rGGXQPq/view.jpg" alt="View bookings">
+                <a onclick="showContent('View')">View</a>
+                <span class="hover-text">You can view all the bookings. <br>You can view all of them. <br>Click "View" for more information.</span>
+            </div>
+            <div class="tab">
+                <img src="https://i.ibb.co/w03TSsW/edit.jpg" alt="Edit bookings">
+                <a onclick="showContent('Edit')">Edit</a>
+                <span class="hover-text">Here you can edit a booking. <br>Any entry can be changed. <br>Click "Edit" for more information.</span>
+            </div>
+            <div class="tab">
+                <img src="https://i.ibb.co/9yCwJGY/cancel.jpg" alt="Cancel a booking">
+                <a onclick="showContent('Cancel')">Cancel</a>
+                <span class="hover-text">Cancel a booking of a customer. <br>There are refunds offered (T & C)*. <br>Click "Cancel" for more information.</span>
+            </div>
+        </div>
+    </div>
+    <div class="half-page second-half" id="second-half">
+        <p class="plain">Nothing to see here, Hit a button and come back</p>
+    </div>
+</div>
+
+<script>
+function showContent(button) {
+    if (button === 'Book') {
+    document.getElementById('second-half').innerHTML = `
+        <style>
+            body{
+                background-color: black;
+                font-size: 16px;
+            }
+
+            h1 {
+                display: flex;
+                text-align: top;
+                margin: 0px;
+                padding-bottom: 50px;
+                font-family: "Cormorant SC";
+                font-size: 64px;
+            }
+
+            input {
+                height: 10%;
+                border: 0.1px solid gray;
+                border-radius: 10px;
+                margin-left: 20px;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            label {
+                font-size: 24px;
+            }
+
+            span {
+                font-size: 24px;
+                margin-left: 20px;
+            }
+
+            button {
+                border: 0.1px solid white;
+                color: white;
+                background-color: rgb(255,255,255,0.1);
+                height: 10%;
+                width: 40%;
+                border-radius: 10px;
+                font-family: "Cormorant SC";
+                font-size: 20px;
+                font-weight: bold;
+                transition: all 0.15s;
+            }
+
+            button:hover {
+                background-color: rgba(255, 255, 255, 0.8);;
+                cursor: pointer;
+            }
+
+            select {
+                height: 10%;
+                border: 0.1px solid gray;
+                border-radius: 10px;
+                margin-left: 20px;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            form {
+                align-items: center;
+                justify-content: center;
+            }
+
+            .message {
+                color: black;
+                text-align: center;
+                vertical-align: center;
+                justify-content: center;
+                align-items: center;
+                background-color: rgb(27, 118, 246);
+                font-family: "katibeh", "Times New Roman";
+                margin-top: 5%;
+                border: 0.1px solid black;
+                border-radius: 10px;
+                font-size: 24px;
+                height: 5%;
+                width: 21.5%;
+                background-color: rgba(255, 255, 255, 0.574);
+            }
+
+        </style>
+
+        <h1>Hotel Room Booking</h1>
+        <form id="bookingForm" onsubmit="submitBooking(event)">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+
+            <label for="room_type">Room Type:</label>
+            <select id="room_type" name="room_type" required onchange="updatePrice()">
+                <option value="A">Room Type A</option>
+                <option value="B">Room Type B</option>
+                <option value="C">Room Type C</option>
+            </select><br><br>
+
+            <label for="room_number">Room Number:</label>
+            <input type="text" id="room_number" name="room_number" required><br><br>
+
+            <label for="start_time">Start Time:</label>
+            <input type="datetime-local" id="start_time" name="start_time" required onchange="updatePrice()"><br><br>
+
+            <label for="end_time">End Time:</label>
+            <input type="datetime-local" id="end_time" name="end_time" required onchange="updatePrice()"><br><br>
+
+            <label for="price">Price:</label>
+            <span id="price_display">0</span><br><br>
+
+            <button type="submit">Book Room</button>
+        </form>
+
+        <div class="message" id="message"></div>
+    `;
+}
+    if (button === 'View') {
+        document.getElementById('second-half').innerHTML = `
+
+            <style>
+                body{
+                    background-color: black;
+                    font-size: 16px;
+                }
+
+                h1 {
+                    display: flex;
+                    text-align: top;
+                    margin: 0px;
+                    padding-bottom: 50px;
+                    font-family: "Cormorant SC";
+                    font-size: 64px;
+                }
+
+                input {
+                    height: 20%;
+                    border: 0.1px solid gray;
+                    border-radius: 10px;
+                    margin-left: 20px;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                }
+
+                label {
+                    font-size: 24px;
+                }
+
+                button {
+                    border: 0.1px solid white;
+                    color: white;
+                    background-color: rgb(255,255,255,0.1);
+                    padding-top: 2.5%;
+                    padding-left: 10%;
+                    padding-bottom: 2.5%;
+                    padding-right: 10%;
+                    border-radius: 10px;
+                    font-family: "Cormorant SC";
+                    font-size: 18px;
+                    font-weight: bold;
+                    transition: all 0.15s;
+                }
+
+                button:hover {
+                    background-color: rgba(255, 255, 255, 0.8);;
+                    cursor: pointer;
+                }
+
+                select {
+                    height: 20%;
+                    border: 0.1px solid gray;
+                    border-radius: 10px;
+                    margin-left: 20px;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                }
+
+                form {
+                    align-items: center;
+                    justify-content: center;
+                    margin-bottom: 80px;
+                }
+
+                table {
+                    border-collapse: collapse;
+                    border: 0.2px solid white;
+                    border-radius: 2px;
+                    
+                }
+
+                table th {
+                    padding-bottom: 1%;
+                    font-size: 24px;
+                    color: white;
+                    background-color: rgb(255,255,255,0.1);
+                    text-align: center;
+                    font-weight: normal;
+                }
+
+                table td {
+                    border: 1px solid white;
+                    padding-bottom: 0.5%;
+                    font-size: 22px;
+                    color: white;
+                    text-align: center;
+                    font-weight: normal;
+                }
+
+
+
+            </style>
+
+        <h1>View Bookings</h1>
+        <form id="filterForm" onsubmit="applyFilters(event)">
+            <label for="room_filter">Filter by Room Type:</label>
+            <select id="room_filter" name="room_filter">
+                <option value="">All</option>
+                <option value="A">Room Type A</option>
+                <option value="B">Room Type B</option>
+                <option value="C">Room Type C</option>
+            </select><br><br>
+
+            <label for="start_time_filter">Start Time:</label>
+            <input type="datetime-local" id="start_time_filter" name="start_time_filter"><br><br>
+
+            <label for="end_time_filter">End Time:</label>
+            <input type="datetime-local" id="end_time_filter" name="end_time_filter"><br><br>
+
+            <button type="submit">Apply Filters</button>
+        </form>
+
+    
+            <table width=80% id="bookingsTable">
+                <tr>
+                    <th>Booking Id</th>
+                    <th>Room Type</th>
+                    <th>Room Number</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Email</th>
+                    <th>Price</th>
+                </tr>
+                <!-- Booking data will be dynamically populated here -->
+            </table>
+            
+        `;
+        document.querySelector('.half-page:nth-child(2)').style.display = 'flex'; // Show the second half-page
+    // Scroll to the second half of the page
+    const containerHeight = document.querySelector('.container').offsetHeight;
+    window.scrollTo({
+        top: containerHeight,
+        behavior: 'smooth'
+    });
+    fetchBookings();
+    }
+    if (button === 'Edit') {
+        document.getElementById('second-half').innerHTML = `
+        <style>
+                body{
+                    background-color: black;
+                    font-size: 16px;
+                }
+
+                h1 {
+                    text-align: top;
+                    margin: 0px;
+                    padding-bottom: 50px;
+                    font-family: "Cormorant SC";
+                    font-size: 64px;
+                }
+
+                p {
+                    text-align: top;
+                    margin: 0px;
+                    padding-bottom: 20px;
+                    font-size: 28px;
+                }
+
+                label {
+                    font-size: 24px;
+                }
+
+                button {
+                    border: 0.1px solid white;
+                    color: white;
+                    background-color: rgb(255,255,255,0.1);
+                    padding-top: 1%;
+                    padding-left: 5%;
+                    padding-bottom: 1%;
+                    padding-right: 5%;
+                    border-radius: 10px;
+                    font-family: "Cormorant SC";
+                    font-size: 18px;
+                    font-weight: bold;
+                    transition: all 0.15s;
+                }
+
+                button:hover {
+                    background-color: rgba(255, 255, 255, 0.8);;
+                    cursor: pointer;
+                }
+
+                input {
+                    height: 5%;
+                    width: 10%;
+                    border: 0.1px solid gray;
+                    border-radius: 10px;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                }
+
+        </style>
+                    <h1>Edit Booking</h1>
+                    <p>Please enter the Booking ID:</p>
+                    <input type="text" id="editBookingId"><br>
+                    <button onclick="editBookingDetails()">Edit Booking</button>
+                `;
+        document.querySelector('.half-page:nth-child(2)').style.display = 'flex'; // Show the second half-page
+        // Scroll to the second half of the page
+        const containerHeight = document.querySelector('.container').offsetHeight;
+        window.scrollTo({
+            top: containerHeight,
+            behavior: 'smooth'
+        });
+    }
+    if (button === 'Cancel') {
+           // Fetch all bookings and display them with cancel buttons
+           document.getElementById('second-half').innerHTML = `
+
+           <style>
+                body{
+                    background-color: black;
+                    font-size: 16px;
+                }
+
+                h1 {
+                    display: flex;
+                    text-align: top;
+                    margin: 0px;
+                    padding-bottom: 50px;
+                    font-family: "Cormorant SC";
+                    font-size: 64px;
+                }
+
+                label {
+                    font-size: 24px;
+                }
+
+                button {
+                    border: 0.1px solid black;
+                    color: black;
+                    margin-top: 4px;
+                    background-color: rgba(255, 48, 48, 0.4);
+                    padding-top: 2.5%;
+                    padding-left: 10%;
+                    padding-bottom: 2.5%;
+                    padding-right: 10%;
+                    border-radius: 5px;
+                    font-family: "Courier New";
+                    font-size: 18px;
+                    font-weight: bold;
+                    transition: all 0.15s;
+                }
+
+                button:hover {
+                    background-color: rgba(255, 255, 255, 0.8);;
+                    cursor: pointer;
+                }
+
+                .filter {
+                    border: 0.1px solid black;
+                    color: black;
+                    background-color: white;
+                    margin-left: 2%;
+                    padding-top: 2%;
+                    padding-left: 10%;
+                    padding-bottom: 2%;
+                    padding-right: 10%;
+                    border-radius: 10px;
+                    font-family: "Cormorant SC";
+                    font-size: 18px;
+                    font-weight: bold;
+                    transition: all 0.15s;
+                }
+
+                .filter:hover {
+                    background-color: rgba(255, 255, 255, 0.8);;
+                    cursor: pointer;
+                }
+
+                select {
+                    margin-top: 20px;
+                    height: 30%;
+                    width: 70%;
+                    border: 0.1px solid gray;
+                    border-radius: 10px;
+                    margin-left: 20px;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                }
+
+                form {
+                    width: 40%;
+                    align-items: center;
+                    justify-content: center;
+                    margin-bottom: 80px;
+                    text-align: center;
+                }
+
+                table {
+                    width: 80%;
+                    border-collapse: collapse;
+                    border: 0.2px solid white;
+                    border-radius: 2px;
+                    
+                }
+
+                table th {
+                    padding-bottom: 1%;
+                    font-size: 24px;
+                    color: white;
+                    background-color: rgb(255,255,255,0.1);
+                    text-align: center;
+                    font-weight: normal;
+                }
+
+                table td {
+                    border: 1px solid white;
+                    padding-bottom: 0.5%;
+                    font-size: 20px;
+                    color: white;
+                    text-align: center;
+                    font-weight: normal;
+                }
+
+            </style>
+            <h1>View Bookings</h1>
+            <form id="filterForm">
+                <label for="room_filter">Filter by Room Type:</label>
+                <select id="room_filter" name="room_filter">
+                    <option value="">All</option>
+                    <option value="A">Room Type A</option>
+                    <option value="B">Room Type B</option>
+                    <option value="C">Room Type C</option>
+                </select><br><br>
+    
+                <button class="filter" type="submit">Apply Filters</button>
+            </form>
+    
+            <table id="bookingsTable">
+                <tr>
+                    <th>Booking Id</th>
+                    <th>Room Type</th>
+                    <th>Room Number</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Email</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+                <!-- Booking data will be dynamically populated here -->
+            </table>
+            
+        `;
+        document.querySelector('.half-page:nth-child(2)').style.display = 'flex'; // Show the second half-page
+    // Scroll to the second half of the page
+    const containerHeight = document.querySelector('.container').offsetHeight;
+    window.scrollTo({
+        top: containerHeight,
+        behavior: 'smooth'
+    });
+    delBookings();
+    }
+    document.querySelector('.half-page:nth-child(2)').style.display = 'flex'; // Show the second half-page
+    // Scroll to the second half of the page
+    const containerHeight = document.querySelector('.container').offsetHeight;
+    window.scrollTo({
+        top: containerHeight,
+        behavior: 'smooth'
+    });
+}
+function submitBooking(event) {
+    event.preventDefault(); // Prevent default form submission behavior
+
+    // Collect form data
+    const formData = new FormData(document.getElementById('bookingForm'));
+
+    // Convert form data to JSON
+    const jsonData = {};
+    formData.forEach((value, key) => {
+        jsonData[key] = value;
+    });
+
+    // Send POST request to /book endpoint
+    fetch('/book', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(jsonData)
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error('Failed to book room.');
+        }
+    })
+    .then(data => {
+        // Handle successful booking
+        console.log(data);
+        document.getElementById('message').innerText = 'Room booked successfully.';
+    })
+    .catch(error => {
+        // Handle booking error
+        console.error(error);
+        document.getElementById('message').innerText = 'Failed to book room. Please try again.';
+    });
+}
+
+
+function fetchBookings() {
+    // Make an AJAX request to fetch booking data from the Flask backend
+    fetch('/view')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch bookings.');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Clear any existing rows in the table
+            const bookingsTable = document.getElementById('bookingsTable');
+            bookingsTable.innerHTML = `
+                <tr>
+                    <th>Booking Id</th>
+                    <th>Room Type</th>
+                    <th>Room Number</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Email</th>
+                    <th>Price</th>
+                </tr>
+            `;
+
+            // Iterate through each booking and append a row to the table
+            for (const roomType in data) {
+                const roomData = data[roomType];
+                roomData.booked.forEach(booking => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${booking.id}</td>
+                        <td>${roomType}</td>
+                        <td>${booking.room_number}</td>
+                        <td>${new Date(booking.start_time).toLocaleString()}</td>
+                        <td>${new Date(booking.end_time).toLocaleString()}</td>
+                        <td>${booking.email}</td>
+                        <td>${booking.price}</td>
+                    `;
+                    bookingsTable.appendChild(row);
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching bookings:', error);
+        });
+}
+function delBookings() {
+    // Make an AJAX request to fetch booking data from the Flask backend
+    fetch('/view')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch bookings.');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Clear any existing rows in the table
+            const bookingsTable = document.getElementById('bookingsTable');
+            bookingsTable.innerHTML = `
+                <tr>
+                    <th>Booking Id</th>
+                    <th>Room Type</th>
+                    <th>Room Number</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Email</th>
+                    <th>Price</th>
+                    <th>Action<th
+                </tr>
+            `;
+
+            // Iterate through each booking and append a row to the table
+            for (const roomType in data) {
+                const roomData = data[roomType];
+                roomData.booked.forEach(booking => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${booking.id}</td>
+                        <td>${roomType}</td>
+                        <td>${booking.room_number}</td>
+                        <td>${new Date(booking.start_time).toLocaleString()}</td>
+                        <td>${new Date(booking.end_time).toLocaleString()}</td>
+                        <td>${booking.email}</td>
+                        <td>${booking.price}</td>
+                        <td><button onclick="cancelBooking(${booking.id})">Cancel</button></td>
+                    `;
+                    bookingsTable.appendChild(row);
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching bookings:', error);
+        });
+}
+
+function updatePrice() {
+    var room_type = document.getElementById('room_type').value;
+    var start_time = document.getElementById('start_time').value;
+    var end_time = document.getElementById('end_time').value;
+
+    // Make an AJAX request to get the price
+    fetch('/get_price', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ room_type: room_type, start_time: start_time, end_time: end_time })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to fetch price');
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Update the price_display element with the received price
+        if (start_time<end_time) {
+         document.getElementById('price_display').textContent = data.price;
+        }
+        if (start_time>end_time) {
+         document.getElementById('price_display').textContent = 0;
+        }
+    })
+    .catch(error => {
+        console.error('Error fetching price:', error);
+    });
+}
+
+
+function applyFilters(event) {
+    event.preventDefault(); // Prevent default form submission behavior
+
+    // Get the selected room type and start/end time from the form
+    const roomType = document.getElementById('room_filter').value;
+    const startTime = document.getElementById('start_time_filter').value;
+    const endTime = document.getElementById('end_time_filter').value;
+
+    // Construct the URL with query parameters
+    let url = `/view?room_filter=${roomType}`;
+    if (startTime) {
+        url += `&start_time=${encodeURIComponent(startTime)}`;
+    }
+    if (endTime) {
+        url += `&end_time=${encodeURIComponent(endTime)}`;
+    }
+
+    // Make an AJAX request with the selected filters
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch filtered bookings.');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Clear any existing rows in the table
+            const bookingsTable = document.getElementById('bookingsTable');
+            bookingsTable.innerHTML = `
+                <tr>
+                    <th>Booking Id</th>
+                    <th>Room Type</th>
+                    <th>Room Number</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Email</th>
+                    <th>Price</th>
+                </tr>
+            `;
+
+            // Iterate through each room type and its bookings
+            for (const roomType in data) {
+                const roomData = data[roomType];
+                roomData.booked.forEach(booking => {
+                    // Append a row to the table for each booking
+                    bookingsTable.innerHTML += `
+                        <tr>
+                            <td>${booking.id}</td>
+                            <td>${roomType}</td>
+                            <td>${booking.room_number}</td>
+                            <td>${new Date(booking.start_time).toLocaleString()}</td>
+                            <td>${new Date(booking.end_time).toLocaleString()}</td>
+                            <td>${booking.email}</td>
+                            <td>${booking.price}</td>
+                        </tr>
+                    `;
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching filtered bookings:', error);
+        });
+}
+
+
+function editBooking(event) {
+    event.preventDefault();
+    const editemailid = document.getElementById('edit_email').value;
+    const editroomnum = document.getElementById('edit_room_number').value;
+    const editBookingId = document.getElementById('edit_booking_id').value;
+    const editStartTime = document.getElementById('edit_start_time').value;
+    const editEndTime = document.getElementById('edit_end_time').value;
+    
+    fetch('/edit', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            booking_id: editBookingId,
+            start_time: editStartTime,
+            end_time: editEndTime,
+            email:editemailid,
+            room_number:editroomnum
+        })
+    })
+    .then(response => {
+        if (response.ok) {
+            // Handle successful edit
+            document.getElementById('confirmation').innerHTML = 'Booking updated successfully.';
+            console.log('Booking updated successfully.');
+        } else {
+            // Handle edit error
+            document.getElementById('confirmation').innerHTML = 'Failed to update booking.';
+            console.error('Failed to update booking.');
+        }
+    })
+    .catch(error => {
+        // Handle fetch error
+        console.error('Error:', error);
+    });
+}
+
+function cancelBooking(bookingId) {
+    fetch(`/cancel/${bookingId}`, {
+        method: 'POST',
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to cancel booking');
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Reload the bookings table after cancellation
+        delBookings();
+        // Check the booking start time for refund policy
+        const startTime = new Date(data.canceled_booking.start_time);
+        const currentTime = new Date();
+        const timeDifference = startTime.getTime() - currentTime.getTime();
+        const hoursDifference = Math.ceil(timeDifference / (1000 * 3600)); // Convert milliseconds to hours
+        let refundMessage;
+        let refundAmount;
+        if (hoursDifference > 48) {
+            refundMessage = 'Complete refund is applicable.';
+            refundAmount = data.canceled_booking.price;
+        } else if (hoursDifference <= 48 && hoursDifference > 24) {
+            refundMessage = '50% refund is applicable.';
+            refundAmount = data.canceled_booking.price * 0.5; // 50% of the booking price
+        } else {
+            refundMessage = 'No refund is applicable.';
+            refundAmount = 0; // No refund
+        }
+        alert(`${refundMessage} Refund Amount: ${refundAmount}`);
+    })
+    .catch(error => {
+        console.error('Error cancelling booking:', error);
+        alert('Error cancelling booking. Please try again.');
+    });
+}
+
+
+
+function editBookingDetails() {
+    const bookingId = document.getElementById('editBookingId').value;
+    if (bookingId) {
+        // Fetch booking details based on the ID and populate the edit form...
+        fetch(`/booking/${bookingId}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Populate the edit form with fetched booking details
+                document.getElementById('second-half').innerHTML = `
+
+                <style>
+                body{
+                    background-color: black;
+                    font-size: 16px;
+                }
+
+                h1 {
+                    text-align: top;
+                    margin: 0px;
+                    padding-bottom: 50px;
+                    font-family: "Cormorant SC";
+                    font-size: 64px;
+                }
+
+                p {
+                    text-align: top;
+                    margin: 0px;
+                    padding-bottom: 20px;
+                    font-size: 28px;
+                }
+
+                .p {
+                    text-align: center;
+                    margin: 0px;
+                    padding-top: 60px;
+                    margin-right: 21.5%;
+                    font-size: 28px;
+                }
+
+                label {
+                    font-size: 24px;
+                }
+
+                button {
+                    border: 0.1px solid white;
+                    color: white;
+                    background-color: rgb(255,255,255,0.1);
+                    padding-top: 2%;
+                    padding-left: 5%;
+                    padding-bottom: 2%;
+                    padding-right: 5%;
+                    border-radius: 10px;
+                    font-family: "Cormorant SC";
+                    font-size: 18px;
+                    font-weight: bold;
+                    transition: all 0.15s;
+                }
+
+                button:hover {
+                    background-color: rgba(255, 255, 255, 0.8);;
+                    cursor: pointer;
+                }
+
+                input {
+                    margin-left: 5%;
+                    height: 15%;
+                    width: 60%;
+                    border: 0.1px solid gray;
+                    border-radius: 10px;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                }
+
+                form {
+                    width: 40%;
+                }
+
+        </style>
+
+                    <h1>Edit Booking</h1>
+                    <form id="editForm" onsubmit="editBooking(event)">
+                        <input type="hidden" id="edit_booking_id" name="edit_booking_id" value="${data.id}">
+                        
+                        <label for="edit_email">Email:</label>
+                        <input type="email" id="edit_email" name="edit_email" value="${data.email}" required><br><br>
+                        
+                        <label for="edit_room_number">Room Number:</label>
+                        <input type="text" id="edit_room_number" name="edit_room_number" value="${data.room_number}" required><br><br>
+                        
+                        <label for="edit_start_time">Start Time:</label>
+                        <input type="datetime-local" id="edit_start_time" name="edit_start_time" value="${data.start_time}" required><br><br>
+
+                        <label for="edit_end_time">End Time:</label>
+                        <input type="datetime-local" id="edit_end_time" name="edit_end_time" value="${data.end_time}" required><br><br>
+
+                        <button type="submit">Update Booking</button>
+                    </form>
+                    <div class="p" id="confirmation"></div>
+                `;
+            })
+            .catch(error => {
+                console.error('Error fetching booking details:', error);
+                alert('Error fetching booking details. Please try again.');
+            });
+    } else {
+        alert('Please enter a Booking ID.');
+    }
+}
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: "katibeh", Arial, Helvetica, sans-serif
+}
+
+.title {
+    padding-top: 50px;
+    color: black;
+    font-family: "Cormorant SC";
+    font-size: 48px;
+    height: 48px;
+    display: grid;
+}
+
+.descript {
+    height: 30px;
+    padding: 0px;
+    font-size: 30px;
+}
+
+
+.bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(https://png.pngtree.com/background/20230610/original/pngtree-sketch-with-a-brown-building-is-shown-picture-image_3111056.jpg );
+    background-size: cover; /* Cover the entire viewport */
+    background-position: top; /* Position the image at the top */
+    filter: blur(5px);
+    z-index: -1;
+}
+
+.container {
+    height: 200%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; /* Enable vertical scrolling */
+    
+}
+.half-page {
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px solid #ccc; /* Add border to create division */
+    position: relative; /* Ensure content is positioned relative to this container */
+}
+
+.second-half {
+    background-color: #f0f0f0; /* Plain color background for second half */
+}
+
+.tabs {
+    padding-bottom: 100px;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 20px;
+    transition: all 4s smooth;
+}
+
+.tab {
+    text-align: center;
+    margin: 1em;
+    border: 0.1px solid black; /* Remove border */
+    border-radius: 20px;
+    backdrop-filter: blur(50px); /* Blur effect */
+    -webkit-backdrop-filter: blur(50px); /* For Safari */
+    height: 100%;
+    width: 36%;
+    transition: all 0.3s ease;
+}
+
+.tab:hover {
+    padding-right: 20%; /* Double the width on hover */
+}
+
+.tab img {
+    border-radius: 20px;
+    width: 80%;
+    border-radius: 5%;
+    filter: grayscale();
+    display: block;
+    margin-left: auto;
+    margin-top: 8%;
+    margin-bottom: 12%;
+    margin-right: auto;
+    width: 80%;
+}
+
+.tab a {
+    border-radius: 20px;
+    background-color: black;
+    font-size: 20px;
+    border: none;
+    color: #fff;
+    transition: all 0.3s;
+    text-align: center;
+    padding-right: 30px;
+    padding-left: 30px;
+    padding-top: 6px;
+    padding-bottom: 10px;
+    position: relative;
+    cursor: pointer;
+}
+
+.tab a:hover{
+    background-color: white;
+    color: black;
+    padding-left: 30%;
+    padding-right: 30%;
+}
+
+.hover-text {
+    display: none; /* Initially hide hover text */
+    position: absolute; /* Position the hover text absolutely */
+    top: 50%; /* Align the text vertically */
+    left: 0; /* Align the text to the left edge of the tab */
+    right: 0; /* Align the text to the right edge of the tab */
+    text-align: left; /* Center align the text */
+    transform: translateX(50%) translateY(-70%); /* Adjust vertical alignment */
+    font-size: 20px; /* Set font size */
+    color: white; /* Set text color */
+    z-index: -1; /* Ensure the hover text appears above the tab content */
+}
+
+.tab:hover .hover-text {
+    display: block; /* Show hover text on hover */
+}
+
+.plain{
+    font-size: 48px;
+}

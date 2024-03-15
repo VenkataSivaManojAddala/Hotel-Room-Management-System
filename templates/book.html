@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Katibeh&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@300;400;500;600;700&family=Katibeh&display=swap" rel="stylesheet">
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Room</title>
+    <style>
+        body {
+            font-family: "katibeh", Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h2>Book a Room</h2>
+    <form id="booking-form" onsubmit="submitForm(event)">
+        <label for="email">Email </label>
+        <input type="email" id="email" name="email" required>
+        
+        <label for="room-type">Room Type </label>
+        <select id="room-type" name="room-type" required>
+            <option value="">Select Room Type</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+        </select>
+        
+        <label for="room-number">Room Number:</label>
+        <input type="text" id="room-number" name="room-number" required>
+        
+        <label for="start-time">Start Time:</label>
+        <input type="datetime-local" id="start-time" name="start-time" required>
+        
+        <label for="end-time">End Time:</label>
+        <input type="datetime-local" id="end-time" name="end-time" required>
+        
+        <button type="submit">Confirm Booking</button>
+    </form>
+
+    <script>
+        function submitForm(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Get form data
+            const formData = new FormData(document.getElementById('booking-form'));
+
+            // Construct JSON object from form data
+            const formDataJson = {};
+            formData.forEach((value, key) => {
+                formDataJson[key] = value;
+            });
+
+            // Send form data to Python app
+            fetch('/submit_booking', {
+                method: 'POST',
+                body: JSON.stringify(formDataJson),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.text();
+                }
+                throw new Error('Network response was not ok.');
+            })
+            .then(data => {
+                console.log(data); // Print response from Python app
+            })
+            .catch(error => {
+                console.error('There was a problem with your fetch operation:', error);
+            });
+        }
+    </script>
+</body>
+</html>
+ 
